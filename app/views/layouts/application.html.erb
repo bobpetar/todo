@@ -31,6 +31,6 @@
       </div>
       <%= yield %>      
     </div>
-    <%= render 'lists/new_list' %>
+    <%= render 'lists/new_list' if current_user %>
   </body>
 </html>

@@ -10,7 +10,7 @@ RSpec.describe Item, type: :model do
     end
 
     it 'ensures presence of description' do
-      item = Item.new(description: '').save
+      item = Item.new(description: '', list: @list).save
       expect(item).to eq(false)
     end
 

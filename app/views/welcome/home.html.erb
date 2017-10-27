@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row all-lists">
 		<% @lists.each do |list| %>
-			<div class="list-item">
+			<div id="list_<%=list.id%>" class="list-item">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<%= list.description %>
@@ -9,7 +9,8 @@
 							<%= link_to 'Delete', list, 
 													method: :delete, 
 													data: {confirm: "Are you sure you want to delete list \"#{list.description}\" ?" },
-													class: 'btn btn-danger btn-sm' %>
+													class: 'btn btn-danger btn-sm',
+													id: "delete_list_#{list.id}" %>
 						</div>	
 					</div>
 					<div class="panel-body">
@@ -18,7 +19,8 @@
 								<div class="pull-right">
 									<%= link_to 'remove me', item,
 															 method: :delete,
-															 class: 'danger-link'%>
+															 class: 'danger-link',
+															 id: "delete_item_#{item.id}"%>
 								</div>	
 								<%= item.description %>
 								<hr>
@@ -26,7 +28,7 @@
 								<%= best_in_place item, :done, as: :checkbox, collection: {false: "Nope", true: "Yep"}, :class => 'btn btn-sm btn-info' %>
 							</div>
 						<% end %>
-						<%= form_for Item.new do |f| %>
+						<%= form_for Item.new, id:"item_list_#{list.id}" do |f| %>
 							<%= f.hidden_field :list_id, value: list.id %>
 							<%= f.text_field :description, class: 'form-control', placeholder: 'Item description' %>
 							<%= f.submit 'Add', class:'btn btn-success btn-sm' %>
