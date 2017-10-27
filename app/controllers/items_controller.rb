@@ -13,12 +13,14 @@ class ItemsController < ApplicationController
 	end
 
 	def update
-		if @item.update(item_params)
-			flash[:success] = 'Item was updated'
-			redirect_to root_path
-		else
-			flash[:error] = 'Something went wrong'
-			redirect_to root_path
+		respond_to do |format|
+			if @item.update(item_params)
+				format.html { redirect_to(root_path, :notice => 'Item was updated') }
+				format.json { respond_with_bip(@item) }
+			else
+				format.html { redirect_to root_path }
+				format.json { respond_with_bip(@item) }
+			end
 		end
 	end
 

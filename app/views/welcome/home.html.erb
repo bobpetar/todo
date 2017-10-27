@@ -5,11 +5,25 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<%= list.description %>
+						<div class="pull-right">
+							<%= link_to 'Delete', list, 
+													method: :delete, 
+													data: {confirm: "Are you sure you want to delete list \"#{list.description}\" ?" },
+													class: 'btn btn-danger btn-sm' %>
+						</div>	
 					</div>
 					<div class="panel-body">
 						<% list.items.each do |item| %>
 							<div class="well well-sm">
+								<div class="pull-right">
+									<%= link_to 'remove me', item,
+															 method: :delete,
+															 class: 'danger-link'%>
+								</div>	
 								<%= item.description %>
+								<hr>
+								<label for="done">Is it done?</label>
+								<%= best_in_place item, :done, as: :checkbox, collection: {false: "Nope", true: "Yep"}, :class => 'btn btn-sm btn-info' %>
 							</div>
 						<% end %>
 						<%= form_for Item.new do |f| %>
