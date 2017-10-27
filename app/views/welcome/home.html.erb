@@ -7,7 +7,16 @@
 						<%= list.description %>
 					</div>
 					<div class="panel-body">
-
+						<% list.items.each do |item| %>
+							<div class="well well-sm">
+								<%= item.description %>
+							</div>
+						<% end %>
+						<%= form_for Item.new do |f| %>
+							<%= f.hidden_field :list_id, value: list.id %>
+							<%= f.text_field :description, class: 'form-control', placeholder: 'New Item' %>
+							<%= f.submit 'Add', class:'btn btn-success btn-sm' %>
+						<% end %>
 					</div>
 				</div>
 			</div>
