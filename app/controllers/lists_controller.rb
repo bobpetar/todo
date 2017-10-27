@@ -10,19 +10,20 @@ class ListsController < ApplicationController
 
 	def create
 		@list = List.new(list_params)
+		@list.user = current_user
 		if @list.save
 			flash[:success] = "New list was created."
-			redirect_to lists_path
+			redirect_to root_path
 		else
 			flash[:error] = "Something went wrong"
-			redirect_to :back
+			redirect_to root_path
 		end
 	end
 
 	def update
 		if @list.update(list_params)
 			flash[:success] = "Updated"
-			redirect_to lists_path
+			redirect_to root_path
 		else
 			flash[:error] = "Something went wrong"
 			redirect_to :back
@@ -32,7 +33,7 @@ class ListsController < ApplicationController
 	def destroy
 		@list.destroy
 		flash[:success] = "List was deleted"
-		redirect_to lists_path
+		redirect_to root_path
 	end
 
 	private

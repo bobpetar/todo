@@ -1,1 +1,16 @@
-<h3>Welcome</h3>
+<div class="container">
+	<div class="row all-lists">
+		<% @lists.each do |list| %>
+			<div class="list-item">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<%= list.description %>
+					</div>
+					<div class="panel-body">
+
+					</div>
+				</div>
+			</div>
+		<% end%>
+	</div>
+</div>
