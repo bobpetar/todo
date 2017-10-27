@@ -1,12 +1,5 @@
 class ListsController < ApplicationController
-	before_action :set_list, only: [:edit, :show, :update, :destroy]
-
-	def new
-		@list = List.new
-	end
-
-	def edit; end
-	def show; end
+	before_action :set_list, only: :destroy
 
 	def create
 		@list = List.new(list_params)
@@ -15,18 +8,8 @@ class ListsController < ApplicationController
 			flash[:success] = 'New list was created.'
 			redirect_to root_path
 		else
-			flash[:error] = Something went wrong
+			flash[:error] = @list.errors.full_messages.join(', ')
 			redirect_to root_path
-		end
-	end
-
-	def update
-		if @list.update(list_params)
-			flash[:success] = 'Updated'
-			redirect_to root_path
-		else
-			flash[:error] = 'Something went wrong'
-			redirect_to :back
 		end
 	end
 

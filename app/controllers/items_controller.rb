@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 			flash[:success] = 'New item was added'
 			redirect_to root_path
 		else
-			flash[:error] = 'Something went wrong'
+			flash[:error] = @item.errors.full_messages.join(', ')
 			redirect_to root_path
 		end
 	end
@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
 				format.html { redirect_to(root_path, :notice => 'Item was updated') }
 				format.json { respond_with_bip(@item) }
 			else
-				format.html { redirect_to root_path }
+				format.html { redirect_to root_path, :error => @item.errors.full_messages.join(', ') }
 				format.json { respond_with_bip(@item) }
 			end
 		end
