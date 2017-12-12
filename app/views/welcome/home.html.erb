@@ -1,41 +1,41 @@
 <div class="container">
-	<div class="row all-lists">
-		<% @lists.each do |list| %>
-			<div id="list_<%=list.id%>" class="list-item">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<%= list.description %>
-						<div class="pull-right">
-							<%= link_to 'Delete', list, 
-													method: :delete, 
-													data: {confirm: "Are you sure you want to delete list \"#{list.description}\" ?" },
-													class: 'btn btn-danger btn-sm',
-													id: "delete_list_#{list.id}" %>
-						</div>	
-					</div>
-					<div class="panel-body">
-						<% list.items.each do |item| %>
-							<div class="well well-sm">
-								<div class="pull-right">
-									<%= link_to 'remove me', item,
-															 method: :delete,
-															 class: 'danger-link',
-															 id: "delete_item_#{item.id}"%>
-								</div>	
-								<%= item.description %>
-								<hr>
-								<label for="done">Is it done?</label>
-								<%= best_in_place item, :done, as: :checkbox, collection: {false: "Nope", true: "Yep"}, :class => 'btn btn-sm btn-info' %>
-							</div>
-						<% end %>
-						<%= form_for Item.new, id:"item_list_#{list.id}" do |f| %>
-							<%= f.hidden_field :list_id, value: list.id %>
-							<%= f.text_field :description, class: 'form-control', placeholder: 'Item description' %>
-							<%= f.submit 'Add', class:'btn btn-success btn-sm' %>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		<% end%>
-	</div>
-</div> 
+  <div class="row all-lists">
+    <% @lists.each do |list| %>
+      <div id="list_<%=list.id%>" class="list-item">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <%= list.description %>
+            <div class="pull-right">
+              <%= link_to 'Delete', list, 
+                          method: :delete, 
+                          data: {confirm: "Are you sure you want to delete list \"#{list.description}\" ?" },
+                          class: 'btn btn-danger btn-sm',
+                          id: "delete_list_#{list.id}" %>
+            </div>  
+          </div>
+          <div class="panel-body">
+            <% list.items.each do |item| %>
+              <div class="well well-sm">
+                <div class="pull-right">
+                  <%= link_to 'remove me', item,
+                               method: :delete,
+                               class: 'danger-link',
+                               id: "delete_item_#{item.id}"%>
+                </div>  
+                <%= item.description %>
+                <hr>
+                <label for="done">Is it done?</label>
+                <%= best_in_place item, :done, as: :checkbox, collection: {false: "Nope", true: "Yep"}, :class => 'btn btn-sm btn-info' %>
+              </div>
+            <% end %>
+            <%= form_for Item.new, id:"item_list_#{list.id}" do |f| %>
+              <%= f.hidden_field :list_id, value: list.id %>
+              <%= f.text_field :description, class: 'form-control', placeholder: 'Item description' %>
+              <%= f.submit 'Add', class:'btn btn-success btn-sm' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end%>
+  </div>
+</div>
